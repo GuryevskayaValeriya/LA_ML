@@ -1,0 +1,1528 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MATHENGINE // LA_ML — Интерактивная линейная алгебра и ML</title>
+  
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+
+  <!-- Google Fonts: Inter & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- KaTeX for crisp LaTeX formula rendering -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+
+  <!-- Neo-Brutalist Sky Blue & Peach Stylesheet -->
+  <link rel="stylesheet" href="css/style.css?v=9">
+</head>
+<body>
+
+  <!-- Top Header (MATHENGINE Design) -->
+  <header class="app-header">
+    <!-- Design & Theme Mode Switcher -->
+    <div class="theme-bar">
+      <div class="theme-group">
+        <span class="theme-bar-label">🎨 Стиль:</span>
+        <div class="theme-btn-group">
+          <button class="theme-toggle-btn active" data-style-target="neobrutalism">
+            <span>📐 Нео-брутализм (Небо & Персик)</span>
+          </button>
+          <button class="theme-toggle-btn" data-style-target="retro-studio">
+            <span>🍓 Retro Studio (Матча & Клубника)</span>
+          </button>
+        </div>
+      </div>
+      <div class="theme-divider"></div>
+      <div class="theme-group">
+        <span class="theme-bar-label">🌓 Тема:</span>
+        <div class="theme-btn-group">
+          <button class="mode-toggle-btn active" data-mode-target="light">
+            <span>☀️ Светлая</span>
+          </button>
+          <button class="mode-toggle-btn" data-mode-target="dark">
+            <span>🌙 Тёмная</span>
+          </button>
+        </div>
+      </div>
+      <div class="theme-divider"></div>
+      <div class="theme-group">
+        <button class="report-export-btn" id="btn-open-report" title="Сформировать печатный академический отчет по всем модулям и решенным задачам">
+          <span>📑 Сформировать отчет (PDF)</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="top-badge-wrapper">
+      <span class="badge-capsule">ОБРАЗОВАТЕЛЬНЫЙ ПОРТАЛ</span>
+    </div>
+    <h1 class="hero-brand">MATHENGINE <span class="brand-sub">// LA_ML</span></h1>
+    <p class="hero-subtitle">Визуальный интерактивный движок для задач линейной алгебры и машинного обучения</p>
+
+    <!-- Pill Capsule Navigation -->
+    <nav class="nav-pills">
+      <button class="nav-pill active" data-tab="tab-overview">ГЛАВНАЯ</button>
+      <button class="nav-pill" data-tab="tab-matmul">УМНОЖЕНИЕ МАТРИЦ</button>
+      <button class="nav-pill" data-tab="tab-vectors">ВЕКТОРЫ</button>
+      <button class="nav-pill" data-tab="tab-module1">ТРАНСФОРМАЦИИ</button>
+      <button class="nav-pill" data-tab="tab-svm">SVM / КЛАССИФИКАЦИЯ</button>
+      <button class="nav-pill" data-tab="tab-attention">SELF-ATTENTION</button>
+      <button class="nav-pill" data-tab="tab-hessian">ГЕССИАН & ОВРАГИ</button>
+      <button class="nav-pill" data-tab="tab-svd">SVD & LoRA</button>
+      <button class="nav-pill" data-tab="tab-embeddings">ЭМБЕДДИНГИ & RAG</button>
+      <button class="nav-pill" data-tab="tab-module2">PCA (СЖАТИЕ)</button>
+      <button class="nav-pill" data-tab="tab-module3">МНК (РЕГРЕССИЯ)</button>
+      <button class="nav-pill" data-tab="tab-module4">ТРЕНАЖЕР</button>
+    </nav>
+  </header>
+
+  <!-- Main Container -->
+  <main>
+
+    <!-- ============================================================ -->
+    <!-- TAB 0: OVERVIEW / HERO & CURRICULUM MAP                      -->
+    <!-- ============================================================ -->
+    <section id="tab-overview" class="tab-content active">
+
+      <!-- Big Hero Card -->
+      <div class="hero-card">
+        <h2 class="hero-card-title">Математика, которую видно</h2>
+        <p class="hero-card-desc">
+          MATHENGINE // LA_ML - не просто калькулятор, выдающий сухой ответ. Это <b>интерактивный репетитор</b>. Наша цель - показать каждый шаг вычислений: как числа перемножаются в матрицах, как геометрически складываются векторы, где возникают инвариантные направления и как линейная алгебра сжимает данные в машинном обучении.
+        </p>
+        <div>
+          <button class="hero-cta-btn" id="btn-hero-start">НАЧАТЬ С УМНОЖЕНИЯ МАТРИЦ →</button>
+        </div>
+      </div>
+
+      <!-- Section Title: Блок 1 -->
+      <div style="max-width:1240px; margin:0 auto 1rem auto;">
+        <span class="badge-capsule" style="background:#0284c7;">БЛОК 1: ЛИНЕЙНАЯ АЛГЕБРА</span>
+        <h3 style="font-size:1.4rem; font-weight:850; margin-top:0.4rem;">Фундаментальные геометрические и матричные конструкции</h3>
+      </div>
+
+      <!-- Feature Grid: Block 1 -->
+      <div class="feature-grid" style="margin-bottom: 2.5rem;">
+        <!-- Card 1: Умножение матриц -->
+        <div class="feature-card">
+          <div class="feature-card-header">
+            <h3 class="feature-card-title">1. Матричные операции</h3>
+          </div>
+          <ul class="feature-list">
+            <li>Пошаговая анимация умножения матриц A × B = C</li>
+            <li>Подсветка активной строки A и столбца B</li>
+            <li>Арифметическая детализация скалярного произведения</li>
+            <li>Поддержка разных размерностей и произвольный ввод</li>
+          </ul>
+          <button class="feature-card-btn" data-go-tab="tab-matmul">ОТКРЫТЬ МОДУЛЬ →</button>
+        </div>
+
+        <!-- Card 2: Геометрический смысл векторов -->
+        <div class="feature-card peach-accent">
+          <div class="feature-card-header">
+            <h3 class="feature-card-title">2. Геометрия векторов</h3>
+          </div>
+          <ul class="feature-list">
+            <li>Интерактивные векторы с перетаскиванием на холсте</li>
+            <li>Линейные комбинации c₁u + c₂v и линейная оболочка Span</li>
+            <li>Скалярное произведение, проекция и угол θ</li>
+            <li>Векторное произведение и ориентированная площадь</li>
+          </ul>
+          <button class="feature-card-btn" data-go-tab="tab-vectors">ОТКРЫТЬ МОДУЛЬ →</button>
+        </div>
+
+        <!-- Card 3: Собственные векторы и преобразования -->
+        <div class="feature-card">
+          <div class="feature-card-header">
+            <h3 class="feature-card-title">3. Собственные векторы</h3>
+          </div>
+          <ul class="feature-list">
+            <li>Деформация базиса матричным оператором y = Wx + b</li>
+            <li>Выделение инвариантных прямых W v = λ v</li>
+            <li>Наглядное растяжение векторов без изменения направления</li>
+            <li>Определитель det(W) и сохранение ориентации</li>
+          </ul>
+          <button class="feature-card-btn" data-go-tab="tab-module1">ОТКРЫТЬ МОДУЛЬ →</button>
+        </div>
+      </div>
+
+      <!-- Section Title: Блок 2 -->
+      <div style="max-width:1240px; margin:0 auto 1rem auto;">
+        <span class="badge-capsule" style="background:#ea580c;">БЛОК 2: СВЯЗЬ С МАШИННЫМ ОБУЧЕНИЕМ</span>
+        <h3 style="font-size:1.4rem; font-weight:850; margin-top:0.4rem;">Прикладные алгоритмы Data Science и AI</h3>
+      </div>
+
+      <!-- Feature Grid: Block 2 & Practice -->
+      <div class="feature-grid">
+        <!-- Card 4: SVD & LoRA -->
+        <div class="feature-card">
+          <div class="feature-card-header">
+            <h3 class="feature-card-title">1. Сингулярное разложение (SVD) и LoRA</h3>
+          </div>
+          <ul class="feature-list">
+            <li>Факторизация матрицы A = U Σ Vᵀ: поворот, масштаб и ориентация</li>
+            <li>Деформация единичного круга в эллипс сингулярных осей</li>
+            <li>Теорема Эккарта - Янга и низкоранговое сжатие A_k</li>
+            <li>Связь с дообучением LLM: метод LoRA (W = W₀ + B·A)</li>
+          </ul>
+          <button class="feature-card-btn" data-go-tab="tab-svd">ОТКРЫТЬ МОДУЛЬ →</button>
+        </div>
+
+        <!-- Card 5: Embeddings & RAG -->
+        <div class="feature-card peach-accent">
+          <div class="feature-card-header">
+            <h3 class="feature-card-title">2. Эмбеддинги и RAG (Косинусное сходство)</h3>
+          </div>
+          <ul class="feature-list">
+            <li>Семантическое векторное пространство и Cosine Similarity cos(θ)</li>
+            <li>Векторный поиск RAG: ранжирование и извлечение Top-K контекста</li>
+            <li>Инвариантность косинусной меры к длине текста vs L2 расстояние</li>
+            <li>Векторная арифметика Word2Vec: Король - Мужчина + Женщина</li>
+          </ul>
+          <button class="feature-card-btn" data-go-tab="tab-embeddings">ОТКРЫТЬ МОДУЛЬ →</button>
+        </div>
+
+        <!-- Card 6: PCA -->
+        <div class="feature-card">
+          <div class="feature-card-header">
+            <h3 class="feature-card-title">3. Метод главных компонент (PCA)</h3>
+          </div>
+          <ul class="feature-list">
+            <li>Спектральное разложение ковариационной матрицы Σ</li>
+            <li>Сжатие размерности: 2D → 1D и 3D → 2D с вращением сцены</li>
+            <li>Оси максимальной дисперсии данных (PC1, PC2, PC3)</li>
+            <li>Доля сохраненной информации (EVR) и минимизация MSE</li>
+          </ul>
+          <button class="feature-card-btn" data-go-tab="tab-module2">ОТКРЫТЬ МОДУЛЬ →</button>
+        </div>
+
+        <!-- Card 7: МНК Регрессия -->
+        <div class="feature-card peach-accent">
+          <div class="feature-card-header">
+            <h3 class="feature-card-title">4. МНК и ортогональная проекция</h3>
+          </div>
+          <ul class="feature-list">
+            <li>Аналитическое решение через псевдообратную матрицу: w = (XᵀX)⁻¹Xᵀy</li>
+            <li>Ортогональность вектора невязок e к подпространству признаков</li>
+            <li>Коэффициент детерминации R² и ошибка MSE</li>
+            <li>Сравнение с шагами градиентного спуска (GD)</li>
+          </ul>
+          <button class="feature-card-btn" data-go-tab="tab-module3">ОТКРЫТЬ МОДУЛЬ →</button>
+        </div>
+
+        <!-- Card 5: SVM -->
+        <div class="feature-card">
+          <div class="feature-card-header">
+            <h3 class="feature-card-title">5. Линейная классификация и SVM</h3>
+          </div>
+          <ul class="feature-list">
+            <li>Гиперплоскость wᵀx + b = 0 и нормаль w</li>
+            <li>Каноническая полоса отступа 2γ = 2 / ||w|| и опорные векторы</li>
+            <li>Интерактивное разделение классов точек и расчет Accuracy</li>
+            <li>Встроенный датасет Ирисов Фишера (Setosa vs Versicolor)</li>
+          </ul>
+          <button class="feature-card-btn" data-go-tab="tab-svm">ОТКРЫТЬ МОДУЛЬ →</button>
+        </div>
+
+        <!-- Card 6: Attention -->
+        <div class="feature-card peach-accent">
+          <div class="feature-card-header">
+            <h3 class="feature-card-title">6. Механизм внимания (Self-Attention)</h3>
+          </div>
+          <ul class="feature-list">
+            <li>Архитектура Transformer (Attention = softmax(QKᵀ/√d_k)V)</li>
+            <li>Матричный конвейер Q, Kᵀ, софтмакс-нормализация и карта внимания</li>
+            <li>Взвешивание векторов значений V и контекстные эмбеддинги O</li>
+            <li>2D векторные проекции запросов и ключей с углами сходства</li>
+          </ul>
+          <button class="feature-card-btn" data-go-tab="tab-attention">ОТКРЫТЬ МОДУЛЬ →</button>
+        </div>
+
+        <!-- Card 7: Hessian -->
+        <div class="feature-card">
+          <div class="feature-card-header">
+            <h3 class="feature-card-title">7. Обусловленность Гессиана и овраги</h3>
+          </div>
+          <ul class="feature-list">
+            <li>Число обусловленности матрицы вторых производных κ = λ_max / λ_min</li>
+            <li>Геометрия узких оврагов (Ravines) и порог устойчивости шага η_crit</li>
+            <li>Сравнение траекторий в реальном времени: SGD vs Momentum</li>
+            <li>Гашение поперечных осцилляций через накопление импульса</li>
+          </ul>
+          <button class="feature-card-btn" data-go-tab="tab-hessian">ОТКРЫТЬ МОДУЛЬ →</button>
+        </div>
+
+        <!-- Card 8: Тренажер -->
+        <div class="feature-card" style="grid-column: 1 / -1;">
+          <div class="feature-card-header">
+            <h3 class="feature-card-title">8. Интерактивный тренажер практики (8 задач с автопроверкой)</h3>
+          </div>
+          <ul class="feature-list" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:0.5rem;">
+            <li>Задача 1: Векторный таргетинг</li>
+            <li>Задача 2: Обращение деформации W⁻¹</li>
+            <li>Задача 3: Охота за главной осью PCA</li>
+            <li>Задача 4: Энергия сингулярного разложения SVD</li>
+            <li>Задача 5: Векторный таргетинг RAG</li>
+            <li>Задача 6: Разделение классов (SVM)</li>
+            <li>Задача 7: Инвариантное направление W v = λ v</li>
+            <li>Задача 8: Подбор проекции МНК на глаз</li>
+          </ul>
+          <button class="feature-card-btn" data-go-tab="tab-module4">ОТКРЫТЬ ТРЕНАЖЕР →</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- TAB 1: MODULE - MATRIX MULTIPLICATION (A x B = C)            -->
+    <!-- ============================================================ -->
+    <section id="tab-matmul" class="tab-content">
+
+      <!-- MatMul Stage -->
+      <div class="matmul-stage">
+        <!-- Matrix A -->
+        <div class="matmul-matrix-wrap">
+          <div class="matmul-matrix-label">Матрица A (<span id="matmul-dim-a">2×2</span>)</div>
+          <div class="matmul-bracket-box">
+            <div class="matmul-grid" id="matmul-matrix-a"></div>
+          </div>
+        </div>
+
+        <div class="matmul-operator">×</div>
+
+        <!-- Matrix B -->
+        <div class="matmul-matrix-wrap">
+          <div class="matmul-matrix-label">Матрица B (<span id="matmul-dim-b">2×2</span>)</div>
+          <div class="matmul-bracket-box">
+            <div class="matmul-grid" id="matmul-matrix-b"></div>
+          </div>
+        </div>
+
+        <div class="matmul-operator">=</div>
+
+        <!-- Matrix C -->
+        <div class="matmul-matrix-wrap">
+          <div class="matmul-matrix-label">Результат C (<span id="matmul-dim-c">2×2</span>)</div>
+          <div class="matmul-bracket-box">
+            <div class="matmul-grid" id="matmul-matrix-c"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Controls & Details Grid -->
+      <div class="workspace-grid">
+        <!-- Step Breakdown Card -->
+        <div class="panel-card">
+          <div class="panel-title" style="display:flex; justify-content:space-between; align-items:center;">
+            <span>🧮 Пошаговое вычисление элементов</span>
+            <span class="stat-badge badge-cyan" id="matmul-step-progress">Шаг 1 из 4</span>
+          </div>
+
+          <div id="matmul-step-details" style="min-height: 120px; padding: 0.5rem 0;"></div>
+
+          <!-- Playback Toolbar -->
+          <div style="display:flex; gap:0.6rem; flex-wrap:wrap; margin-top:1rem; padding-top:1rem; border-top:2px solid var(--border-subtle);">
+            <button class="btn-primary" id="btn-matmul-play" style="flex:1;">▶ Старт</button>
+            <button class="btn-secondary" id="btn-matmul-prev">⏮ Шаг назад</button>
+            <button class="btn-secondary" id="btn-matmul-next">⏭ Шаг вперед</button>
+            <button class="btn-preset" id="btn-matmul-reset">🔄 В начало</button>
+          </div>
+        </div>
+
+        <!-- Configuration Card -->
+        <div class="panel-card">
+          <div class="panel-title"><span>⚙️</span> Настройка матриц и размерностей</div>
+          
+          <div style="font-size:0.82rem; font-weight:750; color:var(--text-dim); margin-bottom:0.5rem; text-transform:uppercase;">
+            Выбор конфигурации размерностей:
+          </div>
+          <div class="button-grid" style="margin-bottom:1.25rem;">
+            <button class="btn-preset matmul-dim-btn active" data-m="2" data-k="2" data-n="2">2×2 × 2×2</button>
+            <button class="btn-preset matmul-dim-btn" data-m="2" data-k="3" data-n="2">2×3 × 3×2</button>
+            <button class="btn-preset matmul-dim-btn" data-m="3" data-k="3" data-n="3">3×3 × 3×3</button>
+            <button class="btn-preset matmul-dim-btn" data-m="2" data-k="2" data-n="1">2×2 × 2×1 (Вектор)</button>
+          </div>
+
+          <div style="display:flex; gap:0.6rem;">
+            <button class="btn-preset" id="btn-matmul-random" style="flex:1;">🎲 Случайные числа</button>
+          </div>
+
+          <div class="math-card" style="margin-top:1rem;">
+            <div class="math-title">Формула умножения строк на столбцы</div>
+            <div class="math-content">
+              $$C_{ij} = \sum_{p=1}^k A_{ip} \cdot B_{pj}$$
+            </div>
+            <p style="font-size:0.8rem; color:var(--text-muted); line-height:1.5;">
+              Каждый элемент матрицы <i>C</i> на позиции <i>(i, j)</i> формируется как скалярное произведение <i>i</i>-й строки матрицы <i>A</i> на <i>j</i>-й столбец матрицы <i>B</i>.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- TAB 2: MODULE - GEOMETRIC MEANING OF VECTORS                -->
+    <!-- ============================================================ -->
+    <section id="tab-vectors" class="tab-content">
+
+      <div class="workspace-grid">
+        <!-- Canvas View -->
+        <div class="canvas-card">
+          <div class="canvas-header">
+            <div class="canvas-title">
+              <span>📐</span> Интерактивный векторный полигон
+            </div>
+            <!-- Mode Pills -->
+            <div class="pill-toggle-group">
+              <button class="pill-toggle-btn active" data-vmode="linear_combination">Линейная комбинация</button>
+              <button class="pill-toggle-btn" data-vmode="dot_product">Скалярное произведение</button>
+              <button class="pill-toggle-btn" data-vmode="cross_product">Векторное / Площадь</button>
+            </div>
+          </div>
+
+          <div class="canvas-viewport">
+            <canvas id="canvas-vectors"></canvas>
+          </div>
+
+          <div class="canvas-footer">
+            <div class="legend">
+              <div class="legend-item"><span class="legend-dot dot-vec-u"></span> Вектор u</div>
+              <div class="legend-item"><span class="legend-dot dot-vec-v"></span> Вектор v</div>
+              <div class="legend-item"><span class="legend-dot dot-vec-w"></span> Результат w</div>
+            </div>
+            <span>💡 Тяните кружки на концах векторов мышкой прямо на координатной плоскости!</span>
+          </div>
+        </div>
+
+        <!-- Controls & Math -->
+        <div class="control-panel">
+          <!-- Vector Inputs -->
+          <div class="panel-card">
+            <div class="panel-title"><span>🎛️</span> Координаты векторов и скалярные веса</div>
+
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.75rem; margin-bottom:1rem;">
+              <div class="matrix-cell">
+                <label>u_x</label>
+                <input type="number" id="vec-ux" step="0.1" value="2.0">
+              </div>
+              <div class="matrix-cell">
+                <label>u_y</label>
+                <input type="number" id="vec-uy" step="0.1" value="1.0">
+              </div>
+              <div class="matrix-cell">
+                <label>v_x</label>
+                <input type="number" id="vec-vx" step="0.1" value="1.0">
+              </div>
+              <div class="matrix-cell">
+                <label>v_y</label>
+                <input type="number" id="vec-vy" step="0.1" value="2.5">
+              </div>
+            </div>
+
+            <!-- Scalars for Linear Combination -->
+            <div id="vec-scalars-box">
+              <div class="slider-row">
+                <div class="slider-label">
+                  <span>Скалярный вес c₁:</span>
+                  <span class="val" id="vec-c1-val">1.5</span>
+                </div>
+                <input type="range" id="vec-c1-slider" min="-3" max="3" step="0.1" value="1.5">
+              </div>
+
+              <div class="slider-row">
+                <div class="slider-label">
+                  <span>Скалярный вес c₂:</span>
+                  <span class="val" id="vec-c2-val">-0.8</span>
+                </div>
+                <input type="range" id="vec-c2-slider" min="-3" max="3" step="0.1" value="-0.8">
+              </div>
+            </div>
+          </div>
+
+          <!-- Vector Math Card -->
+          <div class="panel-card math-card">
+            <div class="panel-title" id="vec-math-title">Линейная комбинация векторов</div>
+            <div id="vec-math-content"></div>
+            <div id="vec-math-badges" style="display:flex; gap:0.5rem; flex-wrap:wrap; margin-top:0.75rem;"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- TAB 3: MODULE 1 - TRANSFORMATIONS & EIGENVECTORS            -->
+    <!-- ============================================================ -->
+    <section id="tab-module1" class="tab-content">
+
+      <div class="workspace-grid">
+        <!-- Canvas View -->
+        <div class="canvas-card">
+          <div class="canvas-header">
+            <div class="canvas-title">
+              <span>🔄</span> Деформация пространства: <i>y = Wx + b</i>
+            </div>
+            <div class="canvas-toolbar">
+              <button class="tool-btn" id="btn-reset-view-1">Сброс вида</button>
+            </div>
+          </div>
+
+          <div class="canvas-viewport">
+            <canvas id="canvas-module1"></canvas>
+          </div>
+
+          <div class="canvas-footer">
+            <div class="legend">
+              <div class="legend-item"><span class="legend-dot dot-trans-e1"></span> Базис î</div>
+              <div class="legend-item"><span class="legend-dot dot-trans-e2"></span> Базис ĵ</div>
+              <div class="legend-item"><span class="legend-dot dot-trans-eig"></span> Инвариантная ось (Собственный вектор v₁)</div>
+            </div>
+            <span>💡 Перетаскивайте концы векторов мышкой прямо на холсте!</span>
+          </div>
+        </div>
+
+        <!-- Controls & Math -->
+        <div class="control-panel">
+          <div class="panel-card">
+            <div class="panel-title"><span>🎛️</span> Матрица оператора W и смещение (Bias)</div>
+            
+            <!-- Matrix inputs -->
+            <div class="matrix-inputs">
+              <div class="matrix-cell">
+                <label>W₁₁</label>
+                <input type="number" id="m11" step="0.1" value="1.0">
+              </div>
+              <div class="matrix-cell">
+                <label>W₁₂</label>
+                <input type="number" id="m12" step="0.1" value="0.0">
+              </div>
+              <div class="matrix-cell">
+                <label>W₂₁</label>
+                <input type="number" id="m21" step="0.1" value="0.0">
+              </div>
+              <div class="matrix-cell">
+                <label>W₂₂</label>
+                <input type="number" id="m22" step="0.1" value="1.0">
+              </div>
+            </div>
+
+            <!-- Bias inputs -->
+            <div style="display:flex; gap:0.75rem; margin-bottom: 0.85rem;">
+              <div class="matrix-cell" style="flex:1;">
+                <label>b₁</label>
+                <input type="number" id="b1" step="0.1" value="0.0">
+              </div>
+              <div class="matrix-cell" style="flex:1;">
+                <label>b₂</label>
+                <input type="number" id="b2" step="0.1" value="0.0">
+              </div>
+            </div>
+
+            <!-- Geometric Presets -->
+            <div style="font-size: 0.82rem; font-weight: 750; color: var(--text-dim); margin-top: 0.5rem; text-transform: uppercase;">Пресеты линейных операторов:</div>
+            <div class="button-grid">
+              <button class="btn-preset preset-btn" data-preset="identity">Единичная (I)</button>
+              <button class="btn-preset preset-btn" data-preset="rotate45">Поворот 45°</button>
+              <button class="btn-preset preset-btn" data-preset="scale">Масштаб (2λ)</button>
+              <button class="btn-preset preset-btn" data-preset="shear">Сдвиг (Shear)</button>
+              <button class="btn-preset preset-btn" data-preset="reflection">Отражение</button>
+              <button class="btn-preset preset-btn" data-preset="singular" style="color: #b45309; font-weight: 800;">Сжатие (det=0)</button>
+            </div>
+
+            <!-- Feature Toggles -->
+            <div style="margin-top: 1.25rem; padding-top: 1rem; border-top: 2px solid var(--border-subtle); display:flex; flex-direction:column; gap:0.6rem;">
+              <label style="font-size: 0.85rem; font-weight: 750; display:flex; align-items:center; gap:0.5rem; cursor:pointer;">
+                <input type="checkbox" id="toggle-eigenvectors" checked style="width:16px; height:16px; cursor:pointer;"> 
+                <span>🎯 Показать инвариантные собственные векторы (W v = λ v)</span>
+              </label>
+              
+              <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem;">
+                <label style="font-size: 0.85rem; font-weight: 750; display:flex; align-items:center; gap:0.5rem; cursor:pointer;">
+                  <input type="checkbox" id="toggle-neural" style="width:16px; height:16px; cursor:pointer;"> 
+                  <span>Режим слоя нейросети</span>
+                </label>
+                <select id="select-activation" class="neo-select">
+                  <option value="none">Активация: Линейная</option>
+                  <option value="relu">Активация: ReLU</option>
+                  <option value="sigmoid">Активация: Сигмоида (Sigmoid)</option>
+                  <option value="tanh">Активация: Tanh</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- Math Analysis Card -->
+          <div class="panel-card math-card">
+            <div class="panel-title"><span>📐</span> Математический анализ оператора</div>
+            
+            <div class="math-row">
+              <div class="math-title">Аналитический вид</div>
+              <div class="math-content" id="m1-latex-matrix"></div>
+            </div>
+
+            <div class="math-row">
+              <div class="math-title">Геометрический определитель и ранги</div>
+              <div id="m1-det-info"></div>
+            </div>
+
+            <div class="math-row">
+              <div class="math-title">Собственные значения (Инвариантные оси)</div>
+              <div class="math-content" id="m1-latex-eigen"></div>
+              <div id="m1-eigen-info"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- TAB: LINEAR CLASSIFICATION & SVM HYPERPLANE                 -->
+    <!-- ============================================================ -->
+    <section id="tab-svm" class="tab-content">
+      <div class="workspace-grid">
+        <!-- Canvas View -->
+        <div class="canvas-card">
+          <div class="canvas-header">
+            <div class="canvas-title">
+              <span>🎯</span> Линейная классификация и разделяющая гиперплоскость (SVM)
+            </div>
+            <div style="display:flex; gap:0.5rem; align-items:center; flex-wrap:wrap;">
+              <button class="tool-btn" id="btn-undo-svm" title="Отменить действие (Ctrl+Z)">↶ Отмена</button>
+              <button class="tool-btn" id="btn-redo-svm" title="Повторить действие (Ctrl+Y)">↷ Повтор</button>
+              <button class="tool-btn" id="btn-dataset-svm" title="Выбрать или загрузить датасет">📂 Датасет...</button>
+              <button class="tool-btn" id="btn-reset-view-svm">Сброс вида</button>
+            </div>
+          </div>
+
+          <div class="canvas-viewport">
+            <canvas id="canvas-svm"></canvas>
+          </div>
+
+          <div class="canvas-footer">
+            <div class="legend">
+              <div class="legend-item"><span class="legend-dot dot-svm-pos"></span> Класс +1</div>
+              <div class="legend-item"><span class="legend-dot dot-svm-neg"></span> Класс −1</div>
+              <div class="legend-item"><span class="legend-dot dot-dark"></span> Гиперплоскость wᵀx + b = 0</div>
+              <div class="legend-item"><span class="legend-dot dot-svm-margin"></span> Полоса отступа (Margin)</div>
+            </div>
+            <span id="svm-footer-hint">Кликните по холсту для добавления точки. Перетаскивайте нормаль w и точки!</span>
+          </div>
+        </div>
+
+        <!-- Controls & Math -->
+        <div class="control-panel">
+          <div class="panel-card">
+            <div class="panel-title"><span>🎛️</span> Параметры разделяющей гиперплоскости</div>
+
+            <!-- Normal vector w1 -->
+            <div class="slider-row">
+              <div class="slider-label">
+                <span>Вес w₁ (нормаль X):</span>
+                <span class="val" id="svm-w1-val">1.2</span>
+              </div>
+              <input type="range" id="svm-w1-slider" min="-3" max="3" step="0.1" value="1.2">
+            </div>
+
+            <!-- Normal vector w2 -->
+            <div class="slider-row">
+              <div class="slider-label">
+                <span>Вес w₂ (нормаль Y):</span>
+                <span class="val" id="svm-w2-val">0.9</span>
+              </div>
+              <input type="range" id="svm-w2-slider" min="-3" max="3" step="0.1" value="0.9">
+            </div>
+
+            <!-- Bias b -->
+            <div class="slider-row">
+              <div class="slider-label">
+                <span>Сдвиг b (порог):</span>
+                <span class="val" id="svm-b-val">-0.5</span>
+              </div>
+              <input type="range" id="svm-b-slider" min="-5" max="5" step="0.1" value="-0.5">
+            </div>
+
+            <!-- Add point class toggle -->
+            <div style="font-size: 0.82rem; font-weight: 750; color: var(--text-dim); margin-top: 1rem; margin-bottom: 0.4rem; text-transform: uppercase;">
+              Добавление точек при клике:
+            </div>
+            <div class="pill-toggle-group" style="margin-bottom: 1rem;">
+              <button class="pill-toggle-btn active" id="btn-svm-class-pos">+1 (Синий класс)</button>
+              <button class="pill-toggle-btn peach" id="btn-svm-class-neg">−1 (Оранжевый класс)</button>
+            </div>
+
+            <!-- Visual toggles -->
+            <div style="display:flex; flex-direction:column; gap:0.5rem; margin-bottom: 0.75rem;">
+              <label style="display:flex; align-items:center; gap:0.5rem; font-size:0.84rem; font-weight:700; cursor:pointer;">
+                <input type="checkbox" id="svm-toggle-margin" checked> Показывать полосу отступа (Margin strip)
+              </label>
+              <label style="display:flex; align-items:center; gap:0.5rem; font-size:0.84rem; font-weight:700; cursor:pointer;">
+                <input type="checkbox" id="svm-toggle-sv" checked> Выделять опорные векторы (Support Vectors)
+              </label>
+              <label style="display:flex; align-items:center; gap:0.5rem; font-size:0.84rem; font-weight:700; cursor:pointer;">
+                <input type="checkbox" id="svm-toggle-regions" checked> Раскрашивать области решений (+1 / −1)
+              </label>
+            </div>
+
+            <button class="btn-preset" id="btn-svm-reset-points" style="width:100%; margin-top:0.4rem;">↺ Сбросить точки по умолчанию</button>
+          </div>
+
+          <!-- Math Card -->
+          <div class="panel-card math-card">
+            <div class="panel-title"><span>📊</span> Геометрия отступа и точность</div>
+
+            <div class="math-row">
+              <div class="math-title">Уравнение гиперплоскости и норма</div>
+              <div class="math-content" id="svm-latex-formula"></div>
+            </div>
+
+            <div class="math-row">
+              <div class="math-title">Метрики разделения (Accuracy & Margin)</div>
+              <div id="svm-stats-info"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- TAB: SELF-ATTENTION IN TRANSFORMERS                         -->
+    <!-- ============================================================ -->
+    <section id="tab-attention" class="tab-content">
+      <div class="workspace-grid">
+        <!-- Canvas View -->
+        <div class="canvas-card">
+          <div class="canvas-header">
+            <div class="canvas-title">
+              <span>🧠</span> Механизм внимания (Self-Attention в Transformer)
+            </div>
+            <div style="display:flex; gap:0.5rem; align-items:center; flex-wrap:wrap;">
+              <button class="tool-btn" id="btn-attn-randomize" title="Сгенерировать случайные эмбеддинги Q, K, V">🎲 Случайные веса</button>
+              <button class="tool-btn" id="btn-reset-view-attn">Сброс вида</button>
+            </div>
+          </div>
+
+          <div class="canvas-viewport">
+            <canvas id="canvas-attention"></canvas>
+          </div>
+
+          <div class="canvas-footer">
+            <div class="legend">
+              <div class="legend-item"><span class="legend-dot dot-attn-q"></span> Вектор Query (Q) активного токена</div>
+              <div class="legend-item"><span class="legend-dot dot-attn-k"></span> Векторы Keys (K) всех токенов</div>
+              <div class="legend-item"><span class="legend-dot dot-attn-unit"></span> Единичная окружность проекции</div>
+            </div>
+            <span>Толщина стрелок K пропорциональна весу внимания Softmax. Перетаскивайте мышкой для вращения!</span>
+          </div>
+        </div>
+
+        <!-- Controls & Math -->
+        <div class="control-panel">
+          <div class="panel-card">
+            <div class="panel-title"><span>🔤</span> Фокус токена и расчет весов внимания</div>
+
+            <div style="font-size:0.82rem; font-weight:750; color:var(--text-dim); margin-bottom:0.45rem; text-transform:uppercase;">
+              Выберите токен запроса (Query Token):
+            </div>
+            <div id="attn-tokens-pills" class="pill-toggle-group" style="margin-bottom:1rem; flex-wrap:wrap;"></div>
+
+            <!-- Temperature / Scaling Slider -->
+            <div class="slider-row" style="margin-bottom:1rem;">
+              <div class="slider-label">
+                <span>Температура Softmax T (масштаб 1 / (T √d_k)):</span>
+                <span class="val" id="attn-temp-val">1.0×</span>
+              </div>
+              <input type="range" id="attn-temp-slider" min="0.2" max="3.0" step="0.1" value="1.0">
+            </div>
+
+            <!-- Attention Heatmap Table -->
+            <div style="font-size:0.82rem; font-weight:750; color:var(--text-dim); margin-bottom:0.4rem; text-transform:uppercase;">
+              Матрица внимания A = softmax(Q Kᵀ / √d_k):
+            </div>
+            <div id="attn-heatmap-grid" style="margin-bottom:1rem; overflow-x:auto;"></div>
+
+            <!-- Focus Bars -->
+            <div style="font-size:0.82rem; font-weight:750; color:var(--text-dim); margin-bottom:0.4rem; text-transform:uppercase;">
+              Распределение внимания активного токена:
+            </div>
+            <div id="attn-focus-bars"></div>
+          </div>
+
+          <!-- Math Card -->
+          <div class="panel-card math-card">
+            <div class="panel-title"><span>📐</span> Матричные уравнения механизма внимания</div>
+
+            <div class="math-row">
+              <div class="math-title">Аналитическая формула Attention(Q, K, V)</div>
+              <div class="math-content" id="attn-latex-formula"></div>
+            </div>
+
+            <div class="math-row">
+              <div class="math-title">Связь со скалярным произведением в Transformer</div>
+              <div style="font-size:0.83rem; color:var(--text-muted); line-height:1.5;">
+                <p>Скалярное произведение $q_i \cdot k_j$ измеряет семантическую близость между токеном-запросом и контекстным ключом. Функция <b>Softmax</b> преобразует матрицу оценок в распределение вероятностей (сумма по строке = 1). Итоговый вектор каждого токена $o_i = \sum_j A_{ij} v_j$ является <b>взвешенной суммой векторов значений (Value)</b>.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- TAB: HESSIAN CONDITION NUMBER & LOSS LANDSCAPE              -->
+    <!-- ============================================================ -->
+    <section id="tab-hessian" class="tab-content">
+      <div class="workspace-grid">
+        <!-- Canvas View -->
+        <div class="canvas-card">
+          <div class="canvas-header">
+            <div class="canvas-title">
+              <span>📉</span> Обусловленность матрицы Гессе и ландшафт функции потерь
+            </div>
+            <div style="display:flex; gap:0.5rem; align-items:center; flex-wrap:wrap;">
+              <button class="tool-btn" id="btn-hessian-reset-start" title="Вернуть начальную точку в исходное положение">↺ Старт</button>
+              <button class="tool-btn" id="btn-reset-view-hessian">Сброс вида</button>
+            </div>
+          </div>
+
+          <div class="canvas-viewport">
+            <canvas id="canvas-hessian"></canvas>
+          </div>
+
+          <div class="canvas-footer">
+            <div class="legend">
+              <div class="legend-item"><span class="legend-dot dot-hessian-sgd"></span> SGD без момента (Зигзаги)</div>
+              <div class="legend-item"><span class="legend-dot dot-hessian-mom"></span> Оптимизатор Momentum (Быстрый спуск)</div>
+              <div class="legend-item"><span class="legend-dot dot-hessian-contour"></span> Линии уровня потерь L(w) = const</div>
+            </div>
+            <span id="hessian-footer-hint">Перетаскивайте сиреневый маркер старта w₀ мышкой для тестирования траекторий!</span>
+          </div>
+        </div>
+
+        <!-- Controls & Math -->
+        <div class="control-panel">
+          <div class="panel-card">
+            <div class="panel-title"><span>🎛️</span> Геометрия оврага и гиперпараметры оптимизации</div>
+
+            <!-- Condition number kappa slider -->
+            <div class="slider-row">
+              <div class="slider-label">
+                <span>Число обусловленности κ = λ_max / λ_min:</span>
+                <span class="val" id="hessian-kappa-val">10.0</span>
+              </div>
+              <input type="range" id="hessian-kappa-slider" min="1" max="50" step="1" value="10">
+            </div>
+
+            <!-- Ravine Rotation angle slider -->
+            <div class="slider-row">
+              <div class="slider-label">
+                <span>Ориентация дна оврага θ:</span>
+                <span class="val" id="hessian-angle-val">25°</span>
+              </div>
+              <input type="range" id="hessian-angle-slider" min="0" max="180" step="5" value="25">
+            </div>
+
+            <!-- Learning rate slider -->
+            <div class="slider-row">
+              <div class="slider-label">
+                <span>Скорость обучения η (Learning Rate):</span>
+                <span class="val" id="hessian-lr-val">0.12</span>
+              </div>
+              <input type="range" id="hessian-lr-slider" min="0.01" max="0.40" step="0.01" value="0.12">
+            </div>
+
+            <!-- Momentum beta slider -->
+            <div class="slider-row">
+              <div class="slider-label">
+                <span>Коэффициент момента β (Momentum):</span>
+                <span class="val" id="hessian-beta-val">0.85</span>
+              </div>
+              <input type="range" id="hessian-beta-slider" min="0.0" max="0.98" step="0.02" value="0.85">
+            </div>
+
+            <!-- Presets -->
+            <div style="font-size:0.82rem; font-weight:750; color:var(--text-dim); margin-top:1rem; margin-bottom:0.4rem; text-transform:uppercase;">
+              Типовые ландшафты потерь:
+            </div>
+            <div class="button-grid">
+              <button class="btn-preset hessian-preset-btn" data-kappa="1" data-lr="0.15">Изотропная чаша (κ=1)</button>
+              <button class="btn-preset hessian-preset-btn" data-kappa="10" data-lr="0.12">Умеренный овраг (κ=10)</button>
+              <button class="btn-preset hessian-preset-btn" data-kappa="35" data-lr="0.06">Узкий каньон (κ=35)</button>
+            </div>
+          </div>
+
+          <!-- Math Card -->
+          <div class="panel-card math-card">
+            <div class="panel-title"><span>📐</span> Спектр гессиана и устойчивость спуска</div>
+
+            <div class="math-row">
+              <div class="math-title">Спектральное число обусловленности κ(H)</div>
+              <div class="math-content" id="hessian-latex-formula"></div>
+            </div>
+
+            <div class="math-row">
+              <div class="math-title">Сравнение осцилляции и критический порог</div>
+              <div id="hessian-stats-info"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- TAB 4: MODULE 2 - EIGENVECTORS & PCA (2D & 3D)              -->
+    <!-- ============================================================ -->
+    <section id="tab-module2" class="tab-content">
+
+      <div class="workspace-grid">
+        <!-- Canvas View -->
+        <div class="canvas-card">
+          <div class="canvas-header">
+            <div class="canvas-title">
+              <span>📉</span> Метод главных компонент (PCA): сжатие данных
+            </div>
+            
+            <!-- 2D / 3D Switcher & Reset -->
+            <div style="display:flex; gap:0.5rem; align-items:center; flex-wrap:wrap;">
+              <div class="pill-toggle-group">
+                <button class="pill-toggle-btn active" id="btn-pca-mode-2d">2D → 1D</button>
+                <button class="pill-toggle-btn sky" id="btn-pca-mode-3d">3D → 2D (Проекция)</button>
+              </div>
+              <button class="tool-btn" id="btn-undo-pca" title="Отменить действие (Ctrl+Z)">↶ Отмена</button>
+              <button class="tool-btn" id="btn-redo-pca" title="Повторить действие (Ctrl+Y)">↷ Повтор</button>
+              <button class="tool-btn" id="btn-dataset-pca" title="Выбрать или загрузить датасет">📂 Датасет...</button>
+              <button class="tool-btn" id="btn-reset-view-2">Сброс вида</button>
+            </div>
+          </div>
+
+          <div class="canvas-viewport">
+            <canvas id="canvas-module2"></canvas>
+          </div>
+
+          <div class="canvas-footer">
+            <div class="legend">
+              <div class="legend-item"><span class="legend-dot dot-pca-pc1"></span> Главная компонента PC1</div>
+              <div class="legend-item"><span class="legend-dot dot-pca-pc2"></span> Вторая компонента PC2</div>
+              <div class="legend-item"><span class="legend-dot dot-dark"></span> Центроид данных μ</div>
+            </div>
+            <span id="pca-footer-hint">Кликните на холст, чтобы добавить новые точки</span>
+          </div>
+        </div>
+
+        <!-- Controls & Math -->
+        <div class="control-panel">
+          <div class="panel-card">
+            <div class="panel-title"><span>🎛️</span> Управление выборкой и сжатием</div>
+
+            <!-- Projection Slider -->
+            <div class="slider-row">
+              <div class="slider-label">
+                <span id="pca-slider-text">Сжатие на главные компоненты (Проекция):</span>
+                <span class="val" id="pca-proj-val">0%</span>
+              </div>
+              <input type="range" id="pca-projection-slider" min="0" max="1" step="0.01" value="0">
+            </div>
+
+            <!-- Generators -->
+            <div style="font-size: 0.82rem; font-weight: 750; color: var(--text-dim); margin-top: 1rem; text-transform: uppercase;">Сгенерировать синтетические распределения:</div>
+            <div class="button-grid">
+              <button class="btn-preset pca-gen-btn" data-type="correlated">Корреляция (Наклон)</button>
+              <button class="btn-preset pca-gen-btn" data-type="circle">Изотропное (Круг)</button>
+              <button class="btn-preset pca-gen-btn" data-type="clusters">Два кластера</button>
+            </div>
+          </div>
+
+          <!-- Math Card -->
+          <div class="panel-card math-card">
+            <div class="panel-title"><span>📊</span> Спектральное разложение ковариации</div>
+
+            <div class="math-row">
+              <div class="math-title">Матрица ковариации Σ</div>
+              <div class="math-content" id="m2-latex-cov"></div>
+            </div>
+
+            <div class="math-row">
+              <div class="math-title">Доля объясненной дисперсии (Explained Variance Ratio)</div>
+              <div class="math-content" id="m2-evr-info"></div>
+            </div>
+
+            <div class="math-row">
+              <div class="math-title">Собственные значения и точность сжатия</div>
+              <div id="m2-stats-info"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- TAB 5: MODULE 3 - LEAST SQUARES & SUBSPACE PROJECTION       -->
+    <!-- ============================================================ -->
+    <section id="tab-module3" class="tab-content">
+
+      <div class="workspace-grid">
+        <!-- Canvas View -->
+        <div class="canvas-card">
+          <div class="canvas-header">
+            <div class="canvas-title">
+              <span>📐</span> Линейная регрессия: ортогональная проекция вектора наблюдений
+            </div>
+            <div class="canvas-toolbar" style="display:flex; gap:0.5rem; align-items:center; flex-wrap:wrap;">
+              <button class="tool-btn" id="btn-undo-ls" title="Отменить действие (Ctrl+Z)">↶ Отмена</button>
+              <button class="tool-btn" id="btn-redo-ls" title="Повторить действие (Ctrl+Y)">↷ Повтор</button>
+              <button class="tool-btn" id="btn-dataset-ls" title="Выбрать или загрузить датасет">📂 Датасет...</button>
+              <button class="tool-btn" id="btn-reset-view-3">Сброс вида</button>
+            </div>
+          </div>
+
+          <div class="canvas-viewport">
+            <canvas id="canvas-module3"></canvas>
+          </div>
+
+          <div class="canvas-footer">
+            <div class="legend">
+              <div class="legend-item"><span class="legend-dot dot-ls-line"></span> Модель <i>y = wx + b</i></div>
+              <div class="legend-item"><span class="legend-dot dot-ls-err"></span> Невязки <i>e = y - ŷ</i> (ошибки)</div>
+            </div>
+            <span>Перетаскивайте точки данных мышкой для наблюдения пересчета весов</span>
+          </div>
+        </div>
+
+        <!-- Controls & Math -->
+        <div class="control-panel">
+          <div class="panel-card">
+            <div class="panel-title"><span>⚙️</span> Решение оптимизации: МНК vs Градиентный спуск</div>
+            
+            <p style="font-size: 0.84rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 1rem;">
+              <b>Аналитическое решение МНК:</b> находит точный глобальный минимум в 1 шаг через обращение матриц: <i>w = (XᵀX)⁻¹Xᵀy</i>.<br>
+              <b>Градиентный спуск (GD):</b> итеративно сдвигает веса против градиента: <i>w ← w - α∇L</i>, как в машинном обучении и нейросетях.
+            </p>
+
+            <div style="display:flex; flex-direction:column; gap:0.6rem;">
+              <div style="display:flex; gap:0.6rem; flex-wrap:wrap;">
+                <button class="btn-primary" id="btn-reset-ls" style="flex:1; min-width:140px; padding:0.65rem 0.9rem;" title="Точное решение задачи в 1 шаг через нормальные уравнения">✓ Аналитическое решение МНК</button>
+                <button class="btn-preset btn-scramble" id="btn-scramble-ls" style="flex:1; min-width:140px; padding:0.65rem 0.9rem; font-weight:800;" title="Сбить веса в случайные, чтобы увидеть оптимизацию с нуля">🎲 Сбить веса (Старт GD)</button>
+              </div>
+              <div style="display:flex; gap:0.6rem; flex-wrap:wrap;">
+                <button class="btn-secondary" id="btn-step-gd" style="flex:1; min-width:140px; padding:0.65rem 0.9rem;" title="Сделать 1 шаг градиентного спуска">👣 Шаг GD</button>
+                <button class="btn-preset" id="btn-auto-gd" style="flex:1; min-width:140px; padding:0.65rem 0.9rem; font-weight:800;" title="Запустить плавную анимацию спуска к оптимуму">▶ Авто-спуск GD</button>
+              </div>
+            </div>
+
+            <!-- Dynamic Feedback & Gradient Status -->
+            <div id="ls-status-feedback" class="status-feedback-box" style="margin-top:1rem; padding:0.85rem 1rem;"></div>
+          </div>
+
+          <!-- Math Card -->
+          <div class="panel-card math-card">
+            <div class="panel-title"><span>📐</span> Метрики проекции и качества</div>
+
+            <div class="math-row">
+              <div class="math-title">Уравнение оптимальной прямой</div>
+              <div class="math-content" id="m3-latex-model"></div>
+            </div>
+
+            <div class="math-row">
+              <div class="math-title">Ортогональность остатков и коэффициент R²</div>
+              <div id="m3-stats-info"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- TAB: SVD & LOW-RANK APPROXIMATION (LoRA)                     -->
+    <!-- ============================================================ -->
+    <section id="tab-svd" class="tab-content">
+
+      <div class="workspace-grid">
+        <!-- Canvas View -->
+        <div class="canvas-card">
+          <div class="canvas-header">
+            <div class="canvas-title">
+              <span>🧬</span> Сингулярное разложение (SVD) и геометрия деформации
+            </div>
+
+            <div style="display:flex; gap:0.5rem; align-items:center; flex-wrap:wrap;">
+              <div class="pill-toggle-group">
+                <button class="pill-toggle-btn active" id="btn-svd-mode-geom">2D Геометрия (U Σ Vᵀ)</button>
+                <button class="pill-toggle-btn sky" id="btn-svd-mode-lora">Низкоранговое сжатие (LoRA)</button>
+              </div>
+              <button class="tool-btn" id="btn-reset-view-svd">Сброс вида</button>
+            </div>
+          </div>
+
+          <div class="canvas-viewport">
+            <canvas id="canvas-svd"></canvas>
+          </div>
+
+          <div class="canvas-footer">
+            <div class="legend" id="svd-legend-geom">
+              <div class="legend-item"><span class="legend-dot dot-svd-v"></span> Правые векторы v₁, v₂ (Базис прообраза)</div>
+              <div class="legend-item"><span class="legend-dot dot-svd-u"></span> Левые векторы u₁, u₂ (Оси эллипса)</div>
+              <div class="legend-item"><span class="legend-dot dot-svd-s"></span> Полуоси σ₁, σ₂</div>
+            </div>
+            <div class="legend" id="svd-legend-lora" style="display:none;">
+              <div class="legend-item"><span class="legend-dot dot-svd-orig"></span> Исходная матрица A</div>
+              <div class="legend-item"><span class="legend-dot dot-svd-approx"></span> Аппроксимация Aₖ = Σ σᵢ uᵢ vᵢᵀ</div>
+            </div>
+            <span id="svd-footer-hint">Двигайте слайдер этапов: x → Vᵀx → ΣVᵀx → UΣVᵀx</span>
+          </div>
+        </div>
+
+        <!-- Controls & Math -->
+        <div class="control-panel">
+          <!-- Geometry Controls -->
+          <div class="panel-card" id="svd-geom-controls">
+            <div class="panel-title"><span>🎛️</span> Матрица A и этапы разложения A = U Σ Vᵀ</div>
+
+            <!-- Transformation Stage Slider -->
+            <div class="slider-row">
+              <div class="slider-label">
+                <span>Этап геометрического действия:</span>
+                <span class="val" id="svd-stage-val">Финал: A x = U Σ Vᵀ x</span>
+              </div>
+              <input type="range" id="svd-stage-slider" min="0" max="3" step="0.05" value="3">
+            </div>
+
+            <!-- Matrix inputs -->
+            <div style="font-size:0.82rem; font-weight:750; color:var(--text-dim); margin-top:0.75rem; text-transform:uppercase;">
+              Элементы матрицы A (2×2):
+            </div>
+            <div class="matrix-inputs" style="margin-top:0.35rem;">
+              <div class="matrix-cell">
+                <label>A₁₁</label>
+                <input type="number" id="svd-a11" step="0.1" value="1.5">
+              </div>
+              <div class="matrix-cell">
+                <label>A₁₂</label>
+                <input type="number" id="svd-a12" step="0.1" value="1.0">
+              </div>
+              <div class="matrix-cell">
+                <label>A₂₁</label>
+                <input type="number" id="svd-a21" step="0.1" value="0.5">
+              </div>
+              <div class="matrix-cell">
+                <label>A₂₂</label>
+                <input type="number" id="svd-a22" step="0.1" value="1.5">
+              </div>
+            </div>
+
+            <!-- Geometric Presets -->
+            <div style="font-size:0.82rem; font-weight:750; color:var(--text-dim); margin-top:0.75rem; text-transform:uppercase;">Пресеты матриц:</div>
+            <div class="button-grid">
+              <button class="btn-preset svd-preset-btn" data-preset="stretch_rot">Сжатие + Поворот</button>
+              <button class="btn-preset svd-preset-btn" data-preset="shear">Сдвиг (Shear)</button>
+              <button class="btn-preset svd-preset-btn" data-preset="singular">Сингулярная (Ранг 1)</button>
+              <button class="btn-preset svd-preset-btn" data-preset="orthogonal">Ортогональная (σ₁=σ₂=1)</button>
+            </div>
+          </div>
+
+          <!-- LoRA Controls -->
+          <div class="panel-card" id="svd-lora-controls" style="display:none;">
+            <div class="panel-title"><span>🤖</span> Низкоранговая адаптация (LoRA: W = W₀ + B·A)</div>
+
+            <p style="font-size:0.82rem; color:var(--text-muted); line-height:1.5; margin-bottom:0.75rem;">
+              Вместо обучения всех <i>m × n</i> параметров модели, в LoRA матрица обновления раскладывается в произведение двух низкоранговых матриц: <i>B (m × k)</i> и <i>A (k × n)</i>.
+            </p>
+
+            <div class="slider-row">
+              <div class="slider-label">
+                <span>Ранг аппроксимации (k):</span>
+                <span class="val" id="svd-rank-val">k = 1</span>
+              </div>
+              <input type="range" id="svd-rank-slider" min="1" max="4" step="1" value="1">
+            </div>
+
+            <!-- Pattern Presets -->
+            <div style="font-size:0.82rem; font-weight:750; color:var(--text-dim); margin-top:0.75rem; text-transform:uppercase;">Тестовые матрицы данных (6×6):</div>
+            <div class="button-grid" style="margin-bottom:0.85rem;">
+              <button class="btn-preset svd-pattern-btn active" data-pattern="cross">Крест (+)</button>
+              <button class="btn-preset svd-pattern-btn" data-pattern="box">Рамка (Box)</button>
+              <button class="btn-preset svd-pattern-btn" data-pattern="gradient">Градиент</button>
+            </div>
+
+            <!-- Visual Pixel Matrix Comparison -->
+            <div class="pixel-matrix-container">
+              <div class="pixel-matrix-card">
+                <div class="pixel-matrix-label">Оригинал A (Ранг max)</div>
+                <div class="pixel-matrix-grid" id="svd-orig-matrix-grid"></div>
+              </div>
+              <div style="font-size:1.4rem; font-weight:900;">≈</div>
+              <div class="pixel-matrix-card">
+                <div class="pixel-matrix-label">Аппроксимация A_k (Ранг k)</div>
+                <div class="pixel-matrix-grid" id="svd-approx-matrix-grid"></div>
+              </div>
+            </div>
+
+            <!-- LoRA Compression Stats -->
+            <div id="svd-lora-metrics" style="display:flex; flex-direction:column; gap:0.4rem;"></div>
+          </div>
+
+          <!-- Math Analysis Card -->
+          <div class="panel-card math-card">
+            <div class="panel-title"><span>📐</span> Спектральная структура A = U Σ Vᵀ</div>
+
+            <div class="math-row">
+              <div class="math-title">Сингулярное разложение</div>
+              <div class="math-content" id="svd-latex-eq"></div>
+            </div>
+
+            <div class="math-row">
+              <div class="math-title">Сингулярные числа и энергия матрицы</div>
+              <div id="svd-stats-info"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- TAB: VECTOR EMBEDDINGS & RAG RETRIEVAL                       -->
+    <!-- ============================================================ -->
+    <section id="tab-embeddings" class="tab-content">
+
+      <div class="workspace-grid">
+        <!-- Canvas View -->
+        <div class="canvas-card">
+          <div class="canvas-header">
+            <div class="canvas-title">
+              <span>🧠</span> Семантическое пространство эмбеддингов & RAG
+            </div>
+
+            <div style="display:flex; gap:0.5rem; align-items:center; flex-wrap:wrap;">
+              <div class="pill-toggle-group">
+                <button class="pill-toggle-btn active" id="btn-emb-mode-rag">Поиск RAG (Top-K)</button>
+                <button class="pill-toggle-btn sky" id="btn-emb-mode-analogy">Арифметика Word2Vec</button>
+              </div>
+              <button class="tool-btn" id="btn-reset-view-emb">Сброс вида</button>
+            </div>
+          </div>
+
+          <div class="canvas-viewport">
+            <canvas id="canvas-embeddings"></canvas>
+          </div>
+
+          <div class="canvas-footer">
+            <div class="legend" id="emb-legend-rag">
+              <div class="legend-item"><span class="legend-dot dot-emb-q"></span> Вектор запроса (Query q)</div>
+              <div class="legend-item"><span class="legend-dot dot-emb-top"></span> Найденный документ (Top-K)</div>
+              <div class="legend-item"><span class="legend-dot dot-emb-other"></span> Документ базы знаний</div>
+            </div>
+            <div class="legend" id="emb-legend-analogy" style="display:none;">
+              <div class="legend-item"><span class="legend-dot dot-emb-a"></span> Вектор A (+)</div>
+              <div class="legend-item"><span class="legend-dot dot-emb-b"></span> Вектор B (-)</div>
+              <div class="legend-item"><span class="legend-dot dot-emb-c"></span> Вектор C (+)</div>
+              <div class="legend-item"><span class="legend-dot dot-emb-res"></span> Результат A - B + C</div>
+            </div>
+            <span id="emb-footer-hint">💡 Перетаскивайте маркер запроса q мышкой прямо по плоскости!</span>
+          </div>
+        </div>
+
+        <!-- Controls & Math -->
+        <div class="control-panel">
+          <!-- RAG Search Controls -->
+          <div class="panel-card" id="emb-rag-controls">
+            <div class="panel-title"><span>🔍</span> Семантический поиск и извлечение Top-K</div>
+
+            <div class="slider-row" style="margin-bottom:0.75rem;">
+              <div class="slider-label">
+                <span>Количество извлекаемых документов (Top-K):</span>
+                <span class="val" id="emb-topk-val">K = 3</span>
+              </div>
+              <input type="range" id="emb-topk-slider" min="1" max="5" step="1" value="3">
+            </div>
+
+            <!-- Search Query Angle Slider -->
+            <div class="slider-row" style="margin-bottom:1rem;">
+              <div class="slider-label">
+                <span>Угол вектора запроса θ:</span>
+                <span class="val" id="emb-query-angle-val">45°</span>
+              </div>
+              <input type="range" id="emb-query-angle-slider" min="0" max="360" step="1" value="45">
+            </div>
+
+            <!-- Ranked Results Table -->
+            <div style="font-size:0.82rem; font-weight:750; color:var(--text-dim); margin-bottom:0.4rem; text-transform:uppercase;">
+              Ранжирование базы знаний по Cosine Similarity:
+            </div>
+            <div style="max-height: 220px; overflow-y: auto; margin-bottom:1rem; border-radius:8px;">
+              <table class="neo-table" id="emb-rag-table">
+                <thead>
+                  <tr>
+                    <th style="width:34px; text-align:center;">#</th>
+                    <th>Концепт</th>
+                    <th>Категория</th>
+                    <th style="text-align:right;">cos(θ)</th>
+                    <th style="text-align:right;">Угол</th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </div>
+
+            <!-- Add custom concept -->
+            <div style="font-size:0.82rem; font-weight:750; color:var(--text-dim); margin-bottom:0.4rem; text-transform:uppercase;">
+              Добавить свой концепт в базу:
+            </div>
+            <div style="display:flex; gap:0.5rem;">
+              <input type="text" id="emb-new-label" class="neo-input" placeholder="Название концепта" style="flex:2; padding:6px 10px; font-weight:700;">
+              <button class="btn-primary" id="btn-emb-add-concept" style="flex:1; padding:6px 10px; font-size:0.8rem;">+ Добавить</button>
+            </div>
+          </div>
+
+          <!-- Analogy Controls -->
+          <div class="panel-card" id="emb-analogy-controls" style="display:none;">
+            <div class="panel-title"><span>✨</span> Векторная арифметика Word2Vec</div>
+
+            <!-- Equation Display -->
+            <div class="analogy-equation" id="emb-equation-box"></div>
+
+            <div style="font-size:0.82rem; font-weight:750; color:var(--text-dim); margin-bottom:0.5rem; text-transform:uppercase;">
+              Выбор семантической аналогии:
+            </div>
+            <div class="button-grid" style="margin-bottom:1rem;">
+              <button class="btn-preset emb-analogy-btn active" data-analogy="king">Король - Мужчина + Женщина</button>
+              <button class="btn-preset emb-analogy-btn" data-analogy="deeplearning">Нейросеть - Линейный + Глубокий</button>
+              <button class="btn-preset emb-analogy-btn" data-analogy="tensor">Матрица - 2D + 3D</button>
+            </div>
+
+            <!-- Action buttons: Animate and Reset -->
+            <div style="display:flex; gap:0.5rem; margin-bottom:0.75rem;">
+              <button class="btn-primary" id="btn-emb-analogy-play" style="flex:2; padding:7px 12px; font-size:0.82rem; font-weight:800;">
+                ▶ Анимировать сборку
+              </button>
+              <button class="tool-btn" id="btn-emb-analogy-reset" style="flex:1; padding:7px 10px; font-size:0.82rem; font-weight:700;">
+                ↺ Сброс
+              </button>
+            </div>
+            <div style="font-size:0.76rem; font-weight:700; color:var(--text-muted); margin-bottom:0.85rem; line-height:1.4;">
+              💡 <b>Интерактивность:</b> перетаскивайте мышкой маркеры <b>A</b> (синий), <b>B</b> (оранжевый) или <b>C</b> (зеленый) прямо на графике!
+            </div>
+
+            <div id="emb-analogy-result-card" class="analogy-result-box" style="padding:0.85rem; margin-top:0.85rem;"></div>
+          </div>
+
+          <!-- Math Card -->
+          <div class="panel-card math-card">
+            <div class="panel-title"><span>📐</span> Метрики сходства в векторных пространствах</div>
+
+            <div class="math-row">
+              <div class="math-title">Косинусное сходство (Cosine Similarity)</div>
+              <div class="math-content" id="emb-latex-formula"></div>
+            </div>
+
+            <div class="math-row">
+              <div class="math-title">Геометрический смысл в RAG и LLM</div>
+              <div id="emb-stats-info"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- TAB 6: MODULE 4 - INTERACTIVE CHALLENGES & PRACTICUM        -->
+    <!-- ============================================================ -->
+    <section id="tab-module4" class="tab-content">
+
+      <div class="workspace-grid">
+        <!-- Canvas View -->
+        <div class="canvas-card">
+          <div class="canvas-header">
+            <div class="canvas-title">
+              <span>🎯</span> Интерактивный полигон практики
+            </div>
+          </div>
+
+          <div class="canvas-viewport">
+            <canvas id="canvas-module4"></canvas>
+          </div>
+
+          <div class="canvas-footer">
+            <span id="challenge-hint" style="color: var(--peach-600); font-weight:750;">💡 Подсказка появится здесь</span>
+          </div>
+        </div>
+
+        <!-- Controls & Task Box -->
+        <div class="control-panel">
+          <div class="panel-card">
+            <div class="challenge-score-box">
+              <div>
+                <div style="font-size:0.75rem; text-transform:uppercase; color:var(--text-dim); font-weight:800; letter-spacing:0.04em;">Ваш текущий счет</div>
+                <div class="score-num" id="user-score">0</div>
+              </div>
+              <select id="select-challenge" class="neo-select">
+                <option value="vector_mapping">Задача 1: Векторный таргетинг</option>
+                <option value="matrix_inversion">Задача 2: Обращение деформации</option>
+                <option value="pca_variance">Задача 3: Охота за главной осью (PCA)</option>
+                <option value="svd_energy">Задача 4: Энергия сингулярного разложения (SVD)</option>
+                <option value="rag_cosine">Задача 5: Векторный таргетинг RAG</option>
+                <option value="class_separation">Задача 6: Разделение классов (SVM)</option>
+                <option value="invariant_eigenvector">Задача 7: Инвариантное направление (Собственный вектор)</option>
+                <option value="least_squares_fit">Задача 8: Подбор проекции МНК</option>
+              </select>
+            </div>
+
+            <h3 id="challenge-title" style="font-size:1.15rem; font-weight:800; margin-bottom:0.5rem; color:var(--text-main);">Подбор матрицы перехода</h3>
+            <p id="challenge-instruction" style="font-size:0.88rem; color:var(--text-muted); line-height:1.6; margin-bottom:1.25rem;">
+              Подберите матрицу W, чтобы перевести начальный вектор в целевой.
+            </p>
+
+            <!-- Matrix Form (Challenges 1 and 2) -->
+            <div id="challenge-matrix-box">
+              <div class="matrix-inputs">
+                <div class="matrix-cell">
+                  <label>W₁₁</label>
+                  <input type="number" id="tr_m11" step="0.1" value="1.0">
+                </div>
+                <div class="matrix-cell">
+                  <label>W₁₂</label>
+                  <input type="number" id="tr_m12" step="0.1" value="0.0">
+                </div>
+                <div class="matrix-cell">
+                  <label>W₂₁</label>
+                  <input type="number" id="tr_m21" step="0.1" value="0.0">
+                </div>
+                <div class="matrix-cell">
+                  <label>W₂₂</label>
+                  <input type="number" id="tr_m22" step="0.1" value="1.0">
+                </div>
+              </div>
+            </div>
+
+            <!-- Angle Slider (Challenges 3, 5, 7) -->
+            <div id="challenge-angle-box" style="display:none; margin-bottom:1.25rem;">
+              <div class="slider-row">
+                <div class="slider-label">
+                  <span>Угол поворота оси / вектора θ:</span>
+                  <span class="val" id="tr-angle-val">0°</span>
+                </div>
+                <input type="range" id="tr-angle-slider" min="0" max="360" step="1" value="0">
+              </div>
+            </div>
+
+            <!-- Rank Slider (Challenge 4 SVD) -->
+            <div id="challenge-rank-box" style="display:none; margin-bottom:1.25rem;">
+              <div class="slider-row">
+                <div class="slider-label">
+                  <span>Выбранный ранг аппроксимации (k):</span>
+                  <span class="val" id="tr-rank-val">k = 1</span>
+                </div>
+                <input type="range" id="tr-rank-slider" min="1" max="4" step="1" value="1">
+              </div>
+            </div>
+
+            <!-- SVM Hyperplane Inputs (Challenge 6) -->
+            <div id="challenge-svm-box" style="display:none; margin-bottom:1.25rem;">
+              <div class="svm-param-grid">
+                <div class="svm-param-card">
+                  <label class="svm-param-header" for="tr_w1">
+                    <span class="svm-param-symbol">w₁</span>
+                    <span class="svm-param-title">нормаль X</span>
+                  </label>
+                  <input type="number" id="tr_w1" class="svm-param-input" step="0.1" value="1.0" aria-label="Параметр w1 (нормаль X)">
+                </div>
+                <div class="svm-param-card">
+                  <label class="svm-param-header" for="tr_w2">
+                    <span class="svm-param-symbol">w₂</span>
+                    <span class="svm-param-title">нормаль Y</span>
+                  </label>
+                  <input type="number" id="tr_w2" class="svm-param-input" step="0.1" value="1.0" aria-label="Параметр w2 (нормаль Y)">
+                </div>
+                <div class="svm-param-card">
+                  <label class="svm-param-header" for="tr_b">
+                    <span class="svm-param-symbol">b</span>
+                    <span class="svm-param-title">сдвиг</span>
+                  </label>
+                  <input type="number" id="tr_b" class="svm-param-input" step="0.1" value="0.0" aria-label="Параметр b (сдвиг)">
+                </div>
+              </div>
+            </div>
+
+            <!-- Least Squares Sliders (Challenge 8) -->
+            <div id="challenge-ls-box" style="display:none; margin-bottom:1.25rem;">
+              <div class="slider-row" style="margin-bottom:0.75rem;">
+                <div class="slider-label">
+                  <span>Наклон прямой k (slope):</span>
+                  <span class="val" id="tr-slope-val">k = 0.80</span>
+                </div>
+                <input type="range" id="tr_slope" min="-3" max="3" step="0.05" value="0.8">
+              </div>
+              <div class="slider-row">
+                <div class="slider-label">
+                  <span>Свободный член b (intercept):</span>
+                  <span class="val" id="tr-intercept-val">b = 0.00</span>
+                </div>
+                <input type="range" id="tr_intercept" min="-5" max="5" step="0.1" value="0">
+              </div>
+            </div>
+
+            <button class="btn-primary" id="btn-verify-challenge" style="width:100%; margin-top:0.75rem;">
+              <span>✓ Проверить решение</span>
+            </button>
+
+            <div id="challenge-feedback" style="margin-top:1rem;"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============================================================ -->
+  <!-- MODAL: DATASET MANAGER (CLASSIC DATASETS & CSV/JSON UPLOAD)  -->
+  <!-- ============================================================ -->
+  <div id="modal-dataset" class="report-modal-overlay" style="display:none;">
+    <div class="report-modal-container" style="max-width:720px;">
+      <div class="report-modal-topbar">
+        <span style="font-weight:800; font-size:1.1rem;">📂 Загрузка и выбор наборов данных</span>
+        <button class="tool-btn" id="btn-close-dataset-modal" style="padding:6px 12px;">✕ Закрыть</button>
+      </div>
+      <div class="report-modal-body" style="padding:1.5rem;">
+        <h4 style="font-size:1.05rem; font-weight:800; margin-bottom:0.75rem;">1. Встроенные классические датасеты:</h4>
+        <div class="button-grid" style="margin-bottom:1.5rem;">
+          <button class="btn-preset btn-dataset-choice" data-dataset="iris" style="text-align:left; padding:12px 14px;">
+            <div class="dataset-title-iris" style="font-weight:800; color:#0284c7; margin-bottom:4px;">🌸 Ирисы Фишера (Fisher's Iris)</div>
+            <div style="font-size:0.78rem; color:var(--text-muted);">Длина и ширина лепестка (Petal Length vs Width). Идеально для SVM и PCA.</div>
+          </button>
+          <button class="btn-preset btn-dataset-choice" data-dataset="height_weight" style="text-align:left; padding:12px 14px;">
+            <div class="dataset-title-hw" style="font-weight:800; color:#ea580c; margin-bottom:4px;">📏 Рост и Вес (Height & Weight)</div>
+            <div style="font-size:0.78rem; color:var(--text-muted);">Антропометрические данные людей. Идеально для Линейной регрессии (МНК) и PCA.</div>
+          </button>
+          <button class="btn-preset btn-dataset-choice" data-dataset="real_estate" style="text-align:left; padding:12px 14px;">
+            <div class="dataset-title-house" style="font-weight:800; color:#16a34a; margin-bottom:4px;">🏠 Цены на недвижимость</div>
+            <div style="font-size:0.78rem; color:var(--text-muted);">Зависимость цены квартиры от площади. Идеально для МНК и регрессии.</div>
+          </button>
+        </div>
+
+        <h4 style="font-size:1.05rem; font-weight:800; margin-bottom:0.75rem;">2. Загрузить свой CSV или JSON:</h4>
+        <div class="dataset-dropzone" id="dataset-dropzone">
+          <input type="file" id="input-dataset-file" accept=".csv,.json,.txt" style="display:none;">
+          <div style="font-size:1.8rem; margin-bottom:0.4rem;">📥</div>
+          <div style="font-weight:700; margin-bottom:0.25rem;">Перетащите файл сюда или нажмите для выбора</div>
+          <div style="font-size:0.78rem; color:var(--text-muted);">Поддерживаются форматы: .csv (разделители , ; \t), .json</div>
+        </div>
+
+        <div id="dataset-preview-box" class="dataset-preview-container" style="display:none; margin-top:1rem; padding:1rem;">
+          <div style="font-weight:800; font-size:0.9rem; margin-bottom:0.5rem;" id="dataset-preview-title">Предпросмотр данных:</div>
+          <div id="dataset-preview-table" style="max-height:160px; overflow-y:auto; font-size:0.8rem; font-family:var(--font-mono); margin-bottom:0.75rem;"></div>
+          <div style="display:flex; gap:0.5rem; justify-content:flex-end;">
+            <button class="btn-primary" id="btn-apply-custom-dataset" style="padding:6px 14px; font-size:0.82rem;">✓ Применить к текущему модулю</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScript Modules -->
+  <script src="js/canvas.js?v=9"></script>
+  <script src="js/modules.js?v=9"></script>
+  <script src="js/new_modules.js?v=9"></script>
+  <script src="js/app.js?v=9"></script>
+</body>
+</html>
